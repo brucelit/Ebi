@@ -375,7 +375,7 @@ mod tests {
     }
 
     #[test]
-    fn jssc_activity_key() {
+    fn jssc_log2log_activity_key() {
         let fin1 = fs::read_to_string("testfiles/aa.slang").unwrap();
         let slang1 = fin1.parse::<FiniteStochasticLanguage>().unwrap();
 
@@ -390,7 +390,6 @@ mod tests {
         right_side/=2usize;
         assert_eq!(jssc, RootLogDiv::sqrt(right_side).one_minus())
     }
-
 
     #[test]
     fn align_sdfa_trace() {
