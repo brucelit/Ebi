@@ -1,0 +1,2605 @@
+stochastic labelled Petri net
+# number of places
+187
+# initial marking
+1
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+# number of transitions
+241
+# transition 0
+label Permit APPROVED by SUPERVISOR
+# weight
+0.0
+# number of input places
+1
+4
+# number of output places
+1
+175
+# transition 1
+silent
+# weight
+13.0
+# number of input places
+1
+38
+# number of output places
+1
+37
+# transition 2
+silent
+# weight
+148.0
+# number of input places
+1
+107
+# number of output places
+1
+59
+# transition 3
+silent
+# weight
+140.0
+# number of input places
+1
+174
+# number of output places
+1
+62
+# transition 4
+silent
+# weight
+0.0
+# number of input places
+1
+108
+# number of output places
+1
+68
+# transition 5
+silent
+# weight
+77.0
+# number of input places
+1
+72
+# number of output places
+1
+10
+# transition 6
+silent
+# weight
+135.0
+# number of input places
+1
+73
+# number of output places
+1
+157
+# transition 7
+silent
+# weight
+4431.0
+# number of input places
+1
+76
+# number of output places
+1
+115
+# transition 8
+silent
+# weight
+23.0
+# number of input places
+1
+81
+# number of output places
+1
+114
+# transition 9
+silent
+# weight
+501.0
+# number of input places
+1
+85
+# number of output places
+1
+102
+# transition 10
+label Request For Payment REJECTED by ADMINISTRATION
+# weight
+143.0
+# number of input places
+1
+35
+# number of output places
+1
+36
+# transition 11
+label Request For Payment APPROVED by ADMINISTRATION
+# weight
+1328.0
+# number of input places
+1
+46
+# number of output places
+1
+47
+# transition 12
+label Permit APPROVED by BUDGET OWNER
+# weight
+1585.0
+# number of input places
+1
+142
+# number of output places
+1
+169
+# transition 13
+silent
+# weight
+0.0
+# number of input places
+1
+15
+# number of output places
+2
+111
+78
+# transition 14
+silent
+# weight
+128.0
+# number of input places
+1
+148
+# number of output places
+1
+95
+# transition 15
+silent
+# weight
+61.0
+# number of input places
+1
+31
+# number of output places
+1
+30
+# transition 16
+silent
+# weight
+5338.0
+# number of input places
+1
+58
+# number of output places
+1
+136
+# transition 17
+silent
+# weight
+659.0
+# number of input places
+1
+164
+# number of output places
+1
+61
+# transition 18
+silent
+# weight
+4057.0
+# number of input places
+1
+25
+# number of output places
+1
+65
+# transition 19
+silent
+# weight
+1585.0
+# number of input places
+1
+70
+# number of output places
+1
+1
+# transition 20
+silent
+# weight
+501.0
+# number of input places
+1
+102
+# number of output places
+1
+75
+# transition 21
+silent
+# weight
+1585.0
+# number of input places
+1
+80
+# number of output places
+1
+142
+# transition 22
+silent
+# weight
+0.0
+# number of input places
+1
+175
+# number of output places
+1
+84
+# transition 23
+silent
+# weight
+140.0
+# number of input places
+1
+88
+# number of output places
+1
+179
+# transition 24
+silent
+# weight
+605.0
+# number of input places
+1
+92
+# number of output places
+1
+158
+# transition 25
+silent
+# weight
+77.0
+# number of input places
+1
+143
+# number of output places
+1
+86
+# transition 26
+label Request For Payment FINAL_APPROVED by SUPERVISOR
+# weight
+1266.0
+# number of input places
+1
+32
+# number of output places
+1
+33
+# transition 27
+label Permit SUBMITTED by EMPLOYEE
+# weight
+4923.0
+# number of input places
+1
+105
+# number of output places
+1
+176
+# transition 28
+label Send Reminder
+# weight
+1137.0
+# number of input places
+1
+52
+# number of output places
+1
+53
+# transition 29
+label Request For Payment REJECTED by SUPERVISOR
+# weight
+8.0
+# number of input places
+1
+126
+# number of output places
+1
+173
+# transition 30
+silent
+# weight
+124.0
+# number of input places
+1
+119
+# number of output places
+1
+82
+# transition 31
+silent
+# weight
+397.0
+# number of input places
+1
+53
+# number of output places
+1
+52
+# transition 32
+silent
+# weight
+225.0
+# number of input places
+1
+29
+# number of output places
+1
+28
+# transition 33
+silent
+# weight
+4057.0
+# number of input places
+1
+144
+# number of output places
+1
+41
+# transition 34
+silent
+# weight
+427.0
+# number of input places
+1
+17
+# number of output places
+1
+64
+# transition 35
+silent
+# weight
+23.0
+# number of input places
+1
+155
+# number of output places
+1
+69
+# transition 36
+silent
+# weight
+0.0
+# number of input places
+1
+78
+# number of output places
+1
+75
+# transition 37
+silent
+# weight
+4057.0
+# number of input places
+1
+79
+# number of output places
+1
+144
+# transition 38
+silent
+# weight
+1.0
+# number of input places
+1
+83
+# number of output places
+1
+131
+# transition 39
+silent
+# weight
+1398.0
+# number of input places
+1
+86
+# number of output places
+1
+116
+# transition 40
+silent
+# weight
+172.0
+# number of input places
+1
+91
+# number of output places
+1
+12
+# transition 41
+silent
+# weight
+1290.0
+# number of input places
+1
+132
+# number of output places
+1
+86
+# transition 42
+label Request For Payment FINAL_APPROVED by DIRECTOR
+# weight
+24.0
+# number of input places
+1
+120
+# number of output places
+1
+22
+# transition 43
+label Permit REJECTED by DIRECTOR
+# weight
+0.0
+# number of input places
+1
+139
+# number of output places
+1
+130
+# transition 44
+silent
+# weight
+9.0
+# number of input places
+1
+146
+# number of output places
+1
+95
+# transition 45
+silent
+# weight
+840.0
+# number of input places
+1
+91
+# number of output places
+1
+98
+# transition 46
+silent
+# weight
+5338.0
+# number of input places
+1
+29
+# number of output places
+1
+20
+# transition 47
+silent
+# weight
+5578.0
+# number of input places
+1
+40
+# number of output places
+1
+45
+# transition 48
+silent
+# weight
+148.0
+# number of input places
+1
+62
+# number of output places
+1
+107
+# transition 49
+silent
+# weight
+0.0
+# number of input places
+1
+68
+# number of output places
+1
+163
+# transition 50
+silent
+# weight
+1476.0
+# number of input places
+1
+72
+# number of output places
+1
+177
+# transition 51
+silent
+# weight
+262.0
+# number of input places
+1
+11
+# number of output places
+1
+74
+# transition 52
+silent
+# weight
+135.0
+# number of input places
+1
+157
+# number of output places
+1
+77
+# transition 53
+silent
+# weight
+89.0
+# number of input places
+1
+81
+# number of output places
+1
+109
+# transition 54
+silent
+# weight
+4269.0
+# number of input places
+1
+85
+# number of output places
+1
+3
+# transition 55
+silent
+# weight
+1.0
+# number of input places
+1
+121
+# number of output places
+1
+86
+# transition 56
+label Declaration REJECTED by BUDGET OWNER
+# weight
+30.0
+# number of input places
+1
+13
+# number of output places
+1
+154
+# transition 57
+label Permit REJECTED by BUDGET OWNER
+# weight
+86.0
+# number of input places
+1
+181
+# number of output places
+1
+128
+# transition 58
+label Request For Payment SUBMITTED by EMPLOYEE
+# weight
+1484.0
+# number of input places
+1
+48
+# number of output places
+1
+49
+# transition 59
+label Permit FOR_APPROVAL by ADMINISTRATION
+# weight
+23.0
+# number of input places
+1
+114
+# number of output places
+1
+67
+# transition 60
+silent
+# weight
+1398.0
+# number of input places
+1
+145
+# number of output places
+1
+95
+# transition 61
+silent
+# weight
+214.0
+# number of input places
+1
+91
+# number of output places
+1
+166
+# transition 62
+silent
+# weight
+1134.0
+# number of input places
+1
+33
+# number of output places
+1
+21
+# transition 63
+silent
+# weight
+24.0
+# number of input places
+1
+49
+# number of output places
+1
+48
+# transition 64
+silent
+# weight
+5338.0
+# number of input places
+1
+20
+# number of output places
+1
+57
+# transition 65
+silent
+# weight
+214.0
+# number of input places
+1
+166
+# number of output places
+1
+61
+# transition 66
+silent
+# weight
+5338.0
+# number of input places
+1
+65
+# number of output places
+1
+113
+# transition 67
+silent
+# weight
+740.0
+# number of input places
+1
+34
+# number of output places
+1
+71
+# transition 68
+silent
+# weight
+9.0
+# number of input places
+1
+103
+# number of output places
+1
+75
+# transition 69
+silent
+# weight
+285.0
+# number of input places
+1
+80
+# number of output places
+1
+167
+# transition 70
+silent
+# weight
+0.0
+# number of input places
+1
+84
+# number of output places
+1
+139
+# transition 71
+silent
+# weight
+1320.0
+# number of input places
+1
+88
+# number of output places
+1
+182
+# transition 72
+silent
+# weight
+4288.0
+# number of input places
+1
+94
+# number of output places
+1
+125
+# transition 73
+label Permit APPROVED by ADMINISTRATION
+# weight
+4811.0
+# number of input places
+1
+118
+# number of output places
+1
+180
+# transition 74
+silent
+# weight
+5338.0
+# number of input places
+1
+136
+# number of output places
+1
+91
+# transition 75
+silent
+# weight
+428.0
+# number of input places
+1
+106
+# number of output places
+1
+30
+# transition 76
+silent
+# weight
+1476.0
+# number of input places
+1
+55
+# number of output places
+1
+124
+# transition 77
+silent
+# weight
+428.0
+# number of input places
+1
+64
+# number of output places
+1
+106
+# transition 78
+silent
+# weight
+2.0
+# number of input places
+1
+156
+# number of output places
+1
+69
+# transition 79
+silent
+# weight
+0.0
+# number of input places
+1
+89
+# number of output places
+1
+75
+# transition 80
+silent
+# weight
+4811.0
+# number of input places
+1
+180
+# number of output places
+1
+80
+# transition 81
+silent
+# weight
+8.0
+# number of input places
+1
+83
+# number of output places
+1
+126
+# transition 82
+silent
+# weight
+0.0
+# number of input places
+1
+5
+# number of output places
+1
+87
+# transition 83
+silent
+# weight
+4421.0
+# number of input places
+1
+117
+# number of output places
+1
+92
+# transition 84
+silent
+# weight
+3200.0
+# number of input places
+1
+147
+# number of output places
+1
+95
+# transition 85
+silent
+# weight
+1290.0
+# number of input places
+1
+94
+# number of output places
+1
+140
+# transition 86
+label Permit SAVED by EMPLOYEE
+# weight
+9.0
+# number of input places
+1
+8
+# number of output places
+1
+103
+# transition 87
+label Start trip
+# weight
+4225.0
+# number of input places
+1
+9
+# number of output places
+1
+7
+# transition 88
+label Request For Payment REJECTED by EMPLOYEE
+# weight
+152.0
+# number of input places
+1
+59
+# number of output places
+1
+60
+# transition 89
+silent
+# weight
+175.0
+# number of input places
+1
+90
+# number of output places
+1
+141
+# transition 90
+silent
+# weight
+0.0
+# number of input places
+1
+122
+# number of output places
+2
+5
+101
+# transition 91
+silent
+# weight
+5338.0
+# number of input places
+1
+113
+# number of output places
+1
+28
+# transition 92
+silent
+# weight
+5578.0
+# number of input places
+1
+165
+# number of output places
+1
+39
+# transition 93
+silent
+# weight
+1.0
+# number of input places
+1
+44
+# number of output places
+1
+43
+# transition 94
+silent
+# weight
+8.0
+# number of input places
+1
+51
+# number of output places
+1
+50
+# transition 95
+silent
+# weight
+4.0
+# number of input places
+1
+60
+# number of output places
+1
+59
+# transition 96
+silent
+# weight
+404.0
+# number of input places
+1
+134
+# number of output places
+1
+63
+# transition 97
+silent
+# weight
+0.0
+# number of input places
+1
+68
+# number of output places
+1
+89
+# transition 98
+silent
+# weight
+30.0
+# number of input places
+1
+72
+# number of output places
+1
+13
+# transition 99
+silent
+# weight
+172.0
+# number of input places
+1
+12
+# number of output places
+1
+74
+# transition 100
+silent
+# weight
+605.0
+# number of input places
+1
+158
+# number of output places
+1
+77
+# transition 101
+silent
+# weight
+5578.0
+# number of input places
+1
+45
+# number of output places
+1
+94
+# transition 102
+silent
+# weight
+4779.0
+# number of input places
+1
+110
+# number of output places
+1
+27
+# transition 103
+label Declaration FINAL_APPROVED by DIRECTOR
+# weight
+123.0
+# number of input places
+1
+178
+# number of output places
+1
+23
+# transition 104
+silent
+# weight
+0.0
+# number of input places
+1
+130
+# number of output places
+1
+90
+# transition 105
+silent
+# weight
+404.0
+# number of input places
+1
+97
+# number of output places
+1
+134
+# transition 106
+silent
+# weight
+1134.0
+# number of input places
+1
+138
+# number of output places
+1
+32
+# transition 107
+silent
+# weight
+1398.0
+# number of input places
+1
+51
+# number of output places
+1
+145
+# transition 108
+silent
+# weight
+285.0
+# number of input places
+1
+167
+# number of output places
+1
+61
+# transition 109
+silent
+# weight
+0.0
+# number of input places
+1
+111
+# number of output places
+1
+66
+# transition 110
+silent
+# weight
+320.0
+# number of input places
+1
+71
+# number of output places
+1
+150
+# transition 111
+silent
+# weight
+523.0
+# number of input places
+1
+73
+# number of output places
+1
+149
+# transition 112
+silent
+# weight
+4225.0
+# number of input places
+1
+75
+# number of output places
+1
+9
+# transition 113
+silent
+# weight
+2846.0
+# number of input places
+1
+80
+# number of output places
+1
+99
+# transition 114
+silent
+# weight
+0.0
+# number of input places
+1
+84
+# number of output places
+1
+159
+# transition 115
+silent
+# weight
+0.0
+# number of input places
+1
+127
+# number of output places
+1
+90
+# transition 116
+silent
+# weight
+110.0
+# number of input places
+1
+93
+# number of output places
+1
+186
+# transition 117
+label Declaration APPROVED by ADMINISTRATION
+# weight
+4288.0
+# number of input places
+1
+125
+# number of output places
+1
+160
+# transition 118
+label Declaration FINAL_APPROVED by SUPERVISOR
+# weight
+4099.0
+# number of input places
+1
+41
+# number of output places
+1
+42
+# transition 119
+silent
+# weight
+24.0
+# number of input places
+1
+97
+# number of output places
+1
+170
+# transition 120
+silent
+# weight
+428.0
+# number of input places
+1
+31
+# number of output places
+1
+171
+# transition 121
+silent
+# weight
+3.0
+# number of input places
+1
+36
+# number of output places
+1
+35
+# transition 122
+silent
+# weight
+42.0
+# number of input places
+1
+42
+# number of output places
+1
+41
+# transition 123
+silent
+# weight
+8.0
+# number of input places
+1
+47
+# number of output places
+1
+46
+# transition 124
+silent
+# weight
+1476.0
+# number of input places
+1
+177
+# number of output places
+1
+54
+# transition 125
+silent
+# weight
+1134.0
+# number of input places
+1
+21
+# number of output places
+1
+65
+# transition 126
+silent
+# weight
+4779.0
+# number of input places
+1
+69
+# number of output places
+1
+110
+# transition 127
+silent
+# weight
+840.0
+# number of input places
+1
+98
+# number of output places
+1
+75
+# transition 128
+silent
+# weight
+0.0
+# number of input places
+1
+80
+# number of output places
+1
+122
+# transition 129
+silent
+# weight
+427.0
+# number of input places
+1
+83
+# number of output places
+1
+17
+# transition 130
+silent
+# weight
+3987.0
+# number of input places
+1
+93
+# number of output places
+1
+14
+# transition 131
+label Request For Payment SAVED by EMPLOYEE
+# weight
+9.0
+# number of input places
+1
+172
+# number of output places
+1
+146
+# transition 132
+label Declaration REJECTED by ADMINISTRATION
+# weight
+1303.0
+# number of input places
+1
+37
+# number of output places
+1
+38
+# transition 133
+label Request For Payment APPROVED by SUPERVISOR
+# weight
+24.0
+# number of input places
+1
+170
+# number of output places
+1
+120
+# transition 134
+silent
+# weight
+428.0
+# number of input places
+1
+171
+# number of output places
+1
+97
+# transition 135
+silent
+# weight
+132.0
+# number of input places
+1
+33
+# number of output places
+1
+32
+# transition 136
+silent
+# weight
+1320.0
+# number of input places
+1
+47
+# number of output places
+1
+104
+# transition 137
+silent
+# weight
+740.0
+# number of input places
+1
+53
+# number of output places
+1
+34
+# transition 138
+silent
+# weight
+154.0
+# number of input places
+1
+162
+# number of output places
+1
+61
+# transition 139
+silent
+# weight
+730.0
+# number of input places
+1
+135
+# number of output places
+1
+63
+# transition 140
+silent
+# weight
+4112.0
+# number of input places
+1
+151
+# number of output places
+1
+69
+# transition 141
+silent
+# weight
+124.0
+# number of input places
+1
+72
+# number of output places
+1
+137
+# transition 142
+silent
+# weight
+3987.0
+# number of input places
+1
+14
+# number of output places
+1
+74
+# transition 143
+silent
+# weight
+740.0
+# number of input places
+1
+77
+# number of output places
+1
+133
+# transition 144
+silent
+# weight
+1.0
+# number of input places
+1
+82
+# number of output places
+1
+24
+# transition 145
+label Request For Payment APPROVED by BUDGET OWNER
+# weight
+489.0
+# number of input places
+1
+30
+# number of output places
+1
+31
+# transition 146
+label Payment Handled
+# weight
+5592.0
+# number of input places
+1
+57
+# number of output places
+1
+58
+# transition 147
+silent
+# weight
+659.0
+# number of input places
+1
+73
+# number of output places
+1
+164
+# transition 148
+silent
+# weight
+4923.0
+# number of input places
+1
+96
+# number of output places
+1
+105
+# transition 149
+silent
+# weight
+4225.0
+# number of input places
+1
+7
+# number of output places
+1
+93
+# transition 150
+silent
+# weight
+1398.0
+# number of input places
+1
+116
+# number of output places
+1
+50
+# transition 151
+silent
+# weight
+254.0
+# number of input places
+1
+58
+# number of output places
+1
+57
+# transition 152
+silent
+# weight
+1460.0
+# number of input places
+1
+61
+# number of output places
+1
+6
+# transition 153
+silent
+# weight
+0.0
+# number of input places
+1
+112
+# number of output places
+1
+66
+# transition 154
+silent
+# weight
+420.0
+# number of input places
+1
+71
+# number of output places
+1
+152
+# transition 155
+silent
+# weight
+2852.0
+# number of input places
+1
+73
+# number of output places
+1
+100
+# transition 156
+silent
+# weight
+1585.0
+# number of input places
+1
+1
+# number of output places
+1
+76
+# transition 157
+silent
+# weight
+4923.0
+# number of input places
+1
+176
+# number of output places
+1
+81
+# transition 158
+silent
+# weight
+4779.0
+# number of input places
+1
+26
+# number of output places
+1
+85
+# transition 159
+silent
+# weight
+86.0
+# number of input places
+1
+128
+# number of output places
+1
+90
+# transition 160
+silent
+# weight
+4269.0
+# number of input places
+1
+3
+# number of output places
+1
+96
+# transition 161
+label Request Payment
+# weight
+5563.0
+# number of input places
+1
+28
+# number of output places
+1
+29
+# transition 162
+silent
+# weight
+369.0
+# number of input places
+1
+92
+# number of output places
+1
+185
+# transition 163
+silent
+# weight
+4779.0
+# number of input places
+1
+0
+# number of output places
+1
+26
+# transition 164
+silent
+# weight
+1290.0
+# number of input places
+1
+38
+# number of output places
+1
+132
+# transition 165
+silent
+# weight
+23.0
+# number of input places
+1
+44
+# number of output places
+1
+155
+# transition 166
+silent
+# weight
+1460.0
+# number of input places
+1
+49
+# number of output places
+1
+19
+# transition 167
+silent
+# weight
+24.0
+# number of input places
+1
+22
+# number of output places
+1
+65
+# transition 168
+silent
+# weight
+1585.0
+# number of input places
+1
+169
+# number of output places
+1
+70
+# transition 169
+silent
+# weight
+2852.0
+# number of input places
+1
+100
+# number of output places
+1
+75
+# transition 170
+silent
+# weight
+86.0
+# number of input places
+1
+80
+# number of output places
+1
+181
+# transition 171
+silent
+# weight
+154.0
+# number of input places
+1
+83
+# number of output places
+1
+162
+# transition 172
+silent
+# weight
+0.0
+# number of input places
+1
+87
+# number of output places
+1
+112
+# transition 173
+silent
+# weight
+110.0
+# number of input places
+1
+186
+# number of output places
+1
+96
+# transition 174
+label Permit REJECTED by ADMINISTRATION
+# weight
+89.0
+# number of input places
+1
+109
+# number of output places
+1
+129
+# transition 175
+label End trip
+# weight
+4421.0
+# number of input places
+1
+2
+# number of output places
+1
+117
+# transition 176
+label Declaration SUBMITTED by EMPLOYEE
+# weight
+5663.0
+# number of input places
+1
+39
+# number of output places
+1
+40
+# transition 177
+label Declaration REJECTED by SUPERVISOR
+# weight
+77.0
+# number of input places
+1
+10
+# number of output places
+1
+143
+# transition 178
+silent
+# weight
+222.0
+# number of input places
+1
+92
+# number of output places
+1
+153
+# transition 179
+silent
+# weight
+1460.0
+# number of input places
+1
+19
+# number of output places
+1
+88
+# transition 180
+silent
+# weight
+140.0
+# number of input places
+1
+179
+# number of output places
+1
+35
+# transition 181
+silent
+# weight
+85.0
+# number of input places
+1
+40
+# number of output places
+1
+39
+# transition 182
+silent
+# weight
+1320.0
+# number of input places
+1
+182
+# number of output places
+1
+46
+# transition 183
+silent
+# weight
+740.0
+# number of input places
+1
+133
+# number of output places
+1
+52
+# transition 184
+silent
+# weight
+148.0
+# number of input places
+1
+161
+# number of output places
+1
+61
+# transition 185
+silent
+# weight
+1134.0
+# number of input places
+1
+63
+# number of output places
+1
+138
+# transition 186
+silent
+# weight
+420.0
+# number of input places
+1
+152
+# number of output places
+1
+69
+# transition 187
+silent
+# weight
+2581.0
+# number of input places
+1
+72
+# number of output places
+1
+123
+# transition 188
+silent
+# weight
+4421.0
+# number of input places
+1
+74
+# number of output places
+1
+2
+# transition 189
+silent
+# weight
+2581.0
+# number of input places
+1
+123
+# number of output places
+1
+79
+# transition 190
+silent
+# weight
+369.0
+# number of input places
+1
+185
+# number of output places
+1
+96
+# transition 191
+label Permit REJECTED by SUPERVISOR
+# weight
+0.0
+# number of input places
+1
+56
+# number of output places
+1
+127
+# transition 192
+silent
+# weight
+148.0
+# number of input places
+1
+60
+# number of output places
+1
+161
+# transition 193
+silent
+# weight
+8.0
+# number of input places
+1
+173
+# number of output places
+1
+62
+# transition 194
+silent
+# weight
+0.0
+# number of input places
+1
+66
+# number of output places
+1
+4
+# transition 195
+silent
+# weight
+4288.0
+# number of input places
+1
+160
+# number of output places
+1
+72
+# transition 196
+silent
+# weight
+262.0
+# number of input places
+1
+73
+# number of output places
+1
+11
+# transition 197
+silent
+# weight
+2846.0
+# number of input places
+1
+99
+# number of output places
+1
+76
+# transition 198
+silent
+# weight
+4811.0
+# number of input places
+1
+81
+# number of output places
+1
+118
+# transition 199
+silent
+# weight
+9.0
+# number of input places
+1
+85
+# number of output places
+1
+8
+# transition 200
+silent
+# weight
+89.0
+# number of input places
+1
+129
+# number of output places
+1
+90
+# transition 201
+silent
+# weight
+128.0
+# number of input places
+1
+93
+# number of output places
+1
+148
+# transition 202
+silent
+# weight
+175.0
+# number of input places
+1
+184
+# number of output places
+1
+96
+# transition 203
+silent
+# weight
+3200.0
+# number of input places
+1
+92
+# number of output places
+1
+147
+# transition 204
+label Declaration APPROVED by SUPERVISOR
+# weight
+124.0
+# number of input places
+1
+137
+# number of output places
+1
+119
+# transition 205
+label Request For Payment REJECTED by BUDGET OWNER
+# weight
+1.0
+# number of input places
+1
+131
+# number of output places
+1
+16
+# transition 206
+label Declaration APPROVED by BUDGET OWNER
+# weight
+1492.0
+# number of input places
+1
+54
+# number of output places
+1
+55
+# transition 207
+label Permit REJECTED by EMPLOYEE
+# weight
+175.0
+# number of input places
+1
+141
+# number of output places
+1
+184
+# transition 208
+silent
+# weight
+0.0
+# number of input places
+1
+87
+# number of output places
+1
+56
+# transition 209
+silent
+# weight
+16.0
+# number of input places
+1
+55
+# number of output places
+1
+54
+# transition 210
+silent
+# weight
+1290.0
+# number of input places
+1
+140
+# number of output places
+1
+37
+# transition 211
+silent
+# weight
+23.0
+# number of input places
+1
+168
+# number of output places
+1
+43
+# transition 212
+silent
+# weight
+1460.0
+# number of input places
+1
+6
+# number of output places
+1
+48
+# transition 213
+silent
+# weight
+0.0
+# number of input places
+1
+163
+# number of output places
+1
+61
+# transition 214
+silent
+# weight
+123.0
+# number of input places
+1
+23
+# number of output places
+1
+65
+# transition 215
+silent
+# weight
+0.0
+# number of input places
+1
+70
+# number of output places
+1
+15
+# transition 216
+silent
+# weight
+0.0
+# number of input places
+1
+101
+# number of output places
+1
+75
+# transition 217
+silent
+# weight
+9.0
+# number of input places
+1
+80
+# number of output places
+1
+172
+# transition 218
+silent
+# weight
+730.0
+# number of input places
+1
+83
+# number of output places
+1
+135
+# transition 219
+silent
+# weight
+5578.0
+# number of input places
+1
+95
+# number of output places
+1
+165
+# transition 220
+silent
+# weight
+2.0
+# number of input places
+1
+92
+# number of output places
+1
+18
+# transition 221
+label Permit REJECTED by MISSING
+# weight
+2.0
+# number of input places
+1
+18
+# number of output places
+1
+156
+# transition 222
+label Declaration SAVED by EMPLOYEE
+# weight
+24.0
+# number of input places
+1
+43
+# number of output places
+1
+44
+# transition 223
+label Declaration REJECTED by EMPLOYEE
+# weight
+1406.0
+# number of input places
+1
+50
+# number of output places
+1
+51
+# transition 224
+silent
+# weight
+320.0
+# number of input places
+1
+150
+# number of output places
+1
+95
+# transition 225
+silent
+# weight
+140.0
+# number of input places
+1
+36
+# number of output places
+1
+174
+# transition 226
+silent
+# weight
+4057.0
+# number of input places
+1
+42
+# number of output places
+1
+25
+# transition 227
+silent
+# weight
+1.0
+# number of input places
+1
+16
+# number of output places
+1
+64
+# transition 228
+silent
+# weight
+222.0
+# number of input places
+1
+153
+# number of output places
+1
+69
+# transition 229
+silent
+# weight
+4431.0
+# number of input places
+1
+183
+# number of output places
+1
+73
+# transition 230
+silent
+# weight
+23.0
+# number of input places
+1
+67
+# number of output places
+1
+75
+# transition 231
+silent
+# weight
+1476.0
+# number of input places
+1
+124
+# number of output places
+1
+79
+# transition 232
+silent
+# weight
+1320.0
+# number of input places
+1
+104
+# number of output places
+1
+83
+# transition 233
+silent
+# weight
+30.0
+# number of input places
+1
+154
+# number of output places
+1
+86
+# transition 234
+silent
+# weight
+4112.0
+# number of input places
+1
+91
+# number of output places
+1
+151
+# transition 235
+silent
+# weight
+23.0
+# number of input places
+1
+92
+# number of output places
+1
+168
+# transition 236
+label Permit FINAL_APPROVED by SUPERVISOR
+# weight
+4431.0
+# number of input places
+1
+115
+# number of output places
+1
+183
+# transition 237
+label Permit FINAL_APPROVED by DIRECTOR
+# weight
+0.0
+# number of input places
+1
+159
+# number of output places
+1
+108
+# transition 238
+label Declaration REJECTED by DIRECTOR
+# weight
+1.0
+# number of input places
+1
+24
+# number of output places
+1
+121
+# transition 239
+silent
+# weight
+523.0
+# number of input places
+1
+149
+# number of output places
+1
+95
+# transition 240
+silent
+# weight
+123.0
+# number of input places
+1
+82
+# number of output places
+1
+178
