@@ -22,5 +22,15 @@ Ebi is a command line tool that requires neither installation nor internet acces
 ```
 The following command can be used to compute a stochastic alignment with balance factor set to 0.5:
 ```
-   cargo run probability exptra testfiles/permit2018_sm.slpn 1 "Permit SUBMITTED by EMPLOYEE" "Permit FINAL_APPROVED by SUPERVISOR" "Start trip" "Declaration SUBMITTED by EMPLOYEE" "Declaration FINAL_APPROVED by SUPERVISOR" "Request Payment" "End trip" "Payment Handled"
+   cargo run probability exptra testfiles/permit2018_sm.slpn 0.5 "Permit SUBMITTED by EMPLOYEE" "Permit FINAL_APPROVED by SUPERVISOR" "Start trip" "Declaration SUBMITTED by EMPLOYEE" "Declaration FINAL_APPROVED by SUPERVISOR" "Request Payment" "End trip" "Payment Handled"
+```
+The probability of the identified model paths m1 = <Permit submitted by employee, Permit approved by administration, Permit final approved by supervisor, Start trip, Declaration submitted by employee, Declaration approved by administration, Declaration final approved by supervisor, Request payment, Payment handled> can be queried using the following cmd:
+
+```
+cargo run probability trac testfiles/permit2018_sm.slpn "Permit SUBMITTED by EMPLOYEE" "Permit APPROVED by ADMINISTRATION" "Permit FINAL_APPROVED by SUPERVISOR" "Start trip" "Declaration SUBMITTED by EMPLOYEE" "Declaration APPROVED by ADMINISTRATION" "Declaration FINAL_APPROVED by SUPERVISOR" "Request Payment" "Payment Handled"
+```
+
+Likewise, the probability of the identified model paths m0.5= <Permit submitted by employee, Permit approved by administration, Permit final approved by supervisor, Start trip, Declaration submitted by employee, Declaration approved by administration, Declaration final approved by supervisor, Request payment, Payment handled> can be queried using the following cmd:
+```
+cargo run probability trace testfiles/permit2018_sm.slpn "Permit SUBMITTED by EMPLOYEE" "Permit APPROVED by ADMINISTRATION" "Permit FINAL_APPROVED by SUPERVISOR" "Start trip" "End trip" "Declaration SUBMITTED by EMPLOYEE" "Declaration APPROVED by ADMINISTRATION" "Declaration FINAL_APPROVED by SUPERVISOR" "Request Payment" "Payment Handled"
 ```
