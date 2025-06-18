@@ -1,0 +1,67 @@
+[package]
+name = "ebi"
+version = "0.0.0"
+edition = "2024"
+
+[lib]
+name = "ebi"
+crate-type = ["cdylib", "lib"]
+
+[features]
+default = []
+exactarithmetic = []
+approximatearithmetic = []
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bitvec = "*"
+num-integer = "*"
+num-traits = "*"
+num-bigint = { version = "*", features = ["rand"] }
+num = "*"
+clap = { version = "*", features = ["derive", "cargo", "string"] }
+anyhow = "*"
+clap-verbosity-flag = "*"
+log = { version = "*", features = ["release_max_level_off"] }
+env_logger = "*"
+layout-rs = "*"
+fraction = { version = "*", features = ["with-approx"] }
+serde_json = "*"
+priority-queue = "*"
+process_mining = { version = "*", features = ["graphviz-export"] }
+rand = "0.8.0"
+chrono = "*"
+flate2 = "*"
+rayon = "*"
+parking_lot = "*"
+strsim = "*"
+Inflector = "*"
+strum = "*"
+strum_macros = "*"
+indicatif = "*"
+indexmap = "*"
+rustc-hash="*"
+pathfinding="*"
+fnv = "*"
+jni = "*"
+itertools = "*"
+serde = "*"
+derive_activity_key = {path = "lib/derive_activity_key"}
+logging_timer = "*"
+svg2pdf = "*"
+uuid = "*"
+cfg-if = "*"
+ntest = "*"
+scc = "*"
+
+[dependencies.num-rational]
+version = "0.4.1"
+
+[profile.release]
+debug = false
+strip = true
+panic = 'abort'
+opt-level = 3
+lto = true
+codegen-units = 1
