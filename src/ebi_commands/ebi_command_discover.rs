@@ -7,8 +7,9 @@ use crate::{
         }, sdfa_discovery::convert_log_to_stochastic_transition_system, uniform_stochastic_miner::{UniformStochasticMinerLPN, UniformStochasticMinerTree}
     }
 };
-use std::thread;
 use std::collections::HashMap;
+use rayon::iter::{IntoParallelIterator, ParallelIterator};
+use rand::Rng;
 
 pub const EBI_DISCOVER: EbiCommand = EbiCommand::Group {
     name_short: "disc",
@@ -20,6 +21,7 @@ pub const EBI_DISCOVER: EbiCommand = EbiCommand::Group {
         &EBI_DISCOVER_OCCURRENCE,
         &EBI_DISCOVER_UNIFORM,
         &EBI_DISCOVER_SDFA,
+        &EBI_DISCOVER_SDFA_PARALLEL,
     ],
 };
 
@@ -199,12 +201,12 @@ pub const EBI_DISCOVER_SDFA: EbiCommand = EbiCommand::Command {
         }
 
         let activity_key = log.get_activity_key().clone();
-        let mut stochastic_language = FiniteStochasticLanguage::from((multiset_map, activity_key));
+        let mut stochastic_language = FiniteStochasticLanguage::from((multiset_map.clone(), activity_key.clone()));
 
         log.translate_using_activity_key(stochastic_language.get_activity_key_mut());
 
         // get the target model size
-        let target_size = inputs.remove(0).to_type::<usize>()?;
+        let target_size = *inputs.remove(0).to_type::<usize>()?;
 
         let mut sts = StochasticTransitionSystem::new();
         //create transition system
@@ -223,37 +225,104 @@ pub const EBI_DISCOVER_SDFA: EbiCommand = EbiCommand::Command {
             sts.update_terminating_frequency(state, freq);
         }
 
-        let new_sts = sts.clone();
-        let stochastic_language_clone = stochastic_language.clone();
-        let target_size_clone = target_size.clone();
+        // let size_before_filtering = sts.get_size();
+        println!("initial traces: {:?} and initial size: {}", sts.get_trace_number(), sts.get_size());
+        // println!("before filtering, {:?} and {:?} and {:?} and {:?}", sts.get_sources(), sts.get_targets(), sts.get_activities(), sts.get_transition_frequencies());
+        sts.filter_by_percentage(26.0).unwrap();
+        // println!("after filtering, {:?} and {:?} and {:?} and {:?}", sts.get_sources(), sts.get_targets(), sts.get_activities(), sts.get_transition_frequencies());
+        println!("after traces: {:?} and initial size: {}", sts.get_trace_number(), sts.get_size());
 
-        let size_before_filtering = sts.get_size();
-        println!("initial filter, traces: {:?} and initial size: {}", sts.get_trace_number(), sts.get_size());
+        sts.set_activity_key(stochastic_language.get_activity_key());
+        let sdfa = convert_log_to_stochastic_transition_system(Box::new(stochastic_language), sts, target_size)?;
+        Ok(EbiOutput::Object(EbiObject::StochasticDeterministicFiniteAutomaton(sdfa)))
+    },
+    output_type: &EbiOutputType::ObjectType(EbiObjectType::StochasticDeterministicFiniteAutomaton)
+};
 
+
+pub const EBI_DISCOVER_SDFA_PARALLEL: EbiCommand = EbiCommand::Command { 
+    name_short: "disc_sdfa_parallel", 
+    name_long: Some("discover_sdfa_parallel"), 
+    explanation_short: "Discover an sdfa to target size from the event log.", 
+    explanation_long: None, 
+    latex_link: None, 
+    cli_command: None, 
+    exact_arithmetic: false, 
+    input_types: &[ 
+        &[&EbiInputType::Trait(EbiTrait::EventLog)], 
+        &[&EbiInputType::Usize],
+    ], 
+    input_names: &["EVENT_LOG_FILE", "TARGET_SIZE"], 
+    input_helps: &[ "An event log.",  "The target size of the sdfa."], 
+    execute: |mut inputs, _| {
+        // get the event log
+        let mut log: Box<dyn EbiTraitEventLog + 'static> = inputs.remove(0).to_type::<dyn EbiTraitEventLog>()?;
+
+        // get the stochastic language of the log
+        let trace_num = log.len();
+        let mut multiset = log.to_multiset();
+
+        let mut multiset_map = HashMap::new();
+        // for each key in multiset, divide the frequency by the trace number
+        for (key, value) in multiset.iter_mut() {
+            let mut trace_prob = fraction::Fraction::from(value.clone());
+            trace_prob /= fraction::Fraction::from(trace_num);
+            multiset_map.insert(key.clone(), trace_prob);
+        }
+
+        let activity_key = log.get_activity_key().clone();
+        let mut stochastic_language = FiniteStochasticLanguage::from((multiset_map.clone(), activity_key.clone()));
+        log.translate_using_activity_key(stochastic_language.get_activity_key_mut());
+
+        // get the target model size
+        let target_size = *inputs.remove(0).to_type::<usize>()?;
+
+         // Create a new transition system for each thread
+        let mut sts = StochasticTransitionSystem::new();
         
-        // sts.filter_by_percentage(50.0).unwrap();
-        // println!("after filter, traces: {:?} and initial size: {}", sts.get_trace_number(), sts.get_size());
-        // sts.set_activity_key(stochastic_language.get_activity_key());
-        // let sdfa = convert_log_to_stochastic_transition_system(Box::new(stochastic_language), sts, *target_size, size_before_filtering)?;
+        // Create transition system
+        for trace_index in 0..log.len() {
+            let trace = log.get_trace(trace_index).unwrap(); 
+            let mut state = sts.get_and_add_initial_state();
 
-
-        // start multi threaded filtering
-        let mut handles: Vec<thread::JoinHandle<()>> = vec![];
-        for filter_threshold in [0.0, 5.0, 10.0] {
-        let handle: thread::JoinHandle<()> = thread::spawn(move || {
-            let mut another_new_sts = new_sts.clone();
-            another_new_sts.filter_by_percentage(filter_threshold).unwrap();
-            another_new_sts.set_activity_key(stochastic_language_clone.clone().get_activity_key());
-            let sdfa = convert_log_to_stochastic_transition_system(Box::new(stochastic_language_clone.clone()), another_new_sts, *target_size_clone.clone(), size_before_filtering).unwrap();
-            println!("finish computing one sdfa with filter threshold: {}", filter_threshold);
-        });
-            handles.push(handle);
+            for activity in trace {
+                state = sts.take_or_add_transition(state, *activity, 1);
+            }
         }
-        for handle in handles {
-            handle.join().expect("TODO: panic message");
+        
+        for i in 0..sts.get_sources().len() {
+            // Add the source states
+            let state = sts.get_sources()[i];
+            let freq = sts.get_transition_frequencies()[i];
+            sts.update_terminating_frequency(state, freq);
         }
 
-        Ok(EbiOutput::Object(EbiObject::StochasticDeterministicFiniteAutomaton(convert_log_to_stochastic_transition_system(Box::new(stochastic_language), sts, *target_size, size_before_filtering)?)))
-    }, 
+        // let size_before_filtering = sts.get_size();
+        let filter_percentages = vec![1.0, 3.0, 5.0, 10.0, 15.0, 20.0, 25.0, 30.0];
+        let sts_list: Vec<StochasticTransitionSystem> = sts.filter_by_multiple_percentages(&filter_percentages)?;
+        // Process each threshold in parallel
+        let results: Vec<_> = sts_list
+            .into_par_iter()
+            .map(|mut each_sts| {
+                each_sts.set_activity_key(stochastic_language.get_activity_key());
+                println!("start computation for sts of size: {} and target size: {}", each_sts.get_size(), target_size);
+                
+                // Convert to SDFA
+                let stochastic_language_clone = FiniteStochasticLanguage::from((multiset_map.clone(), activity_key.clone()));
+                convert_log_to_stochastic_transition_system(
+                    Box::new(stochastic_language_clone), 
+                    each_sts, 
+                    target_size, 
+                )
+            })
+            .collect::<Result<Vec<_>, _>>()?;
+
+        // Randomly select one of the results
+        let mut rng = rand::thread_rng();
+        let random_index = rng.gen_range(0..results.len());
+        let selected_sdfa = results.into_iter().nth(random_index).unwrap();
+
+        Ok(EbiOutput::Object(EbiObject::StochasticDeterministicFiniteAutomaton(selected_sdfa)))
+    },
     output_type: &EbiOutputType::ObjectType(EbiObjectType::StochasticDeterministicFiniteAutomaton)
 };

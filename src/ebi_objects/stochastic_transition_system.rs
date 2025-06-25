@@ -1,14 +1,13 @@
 use crate::{
     ebi_framework::{
         activity_key::{Activity, ActivityKey}, infoable::Infoable
-    }, ebi_objects::stochastic_deterministic_finite_automaton::StochasticDeterministicFiniteAutomaton, ebi_traits::ebi_trait_graphable::EbiTraitGraphable, math::{fraction::Fraction, traits::Signed}
+    }, ebi_objects::{stochastic_deterministic_finite_automaton::StochasticDeterministicFiniteAutomaton}, ebi_traits::ebi_trait_graphable::EbiTraitGraphable, math::{fraction::Fraction, traits::Signed}
     
 };
-use anyhow::{Result, anyhow};
+use anyhow::{anyhow, Result};
 use layout::topo::layout::VisualGraph;
-use num::Float;
 use std::{
-    cmp::{max, Ordering},
+    cmp::Ordering,
     collections::{HashMap, HashSet, VecDeque},
     fmt
 };
@@ -74,84 +73,93 @@ pub fn trial_merge(
     
     // Find the transition from red_state to blue_state
     let mut red_to_blue_transition = None;
+    let mut out_going_count = 0;
     for i in 0..self.sources.len() {
         if self.sources[i] == red_state && self.targets[i] == blue_state {
             red_to_blue_transition = Some(i);
-            break;
+            // break;
+        }
+        if self.sources[i] == red_state{
+            out_going_count += 1;
         }
     }
-    
-    let transition_idx = red_to_blue_transition
-        .ok_or_else(|| anyhow!("No transition found from red state {} to blue state {}", red_state, blue_state))?;
-    
-    // Step 1: Convert red->blue transition to self-loop on red
-    self.targets[transition_idx] = red_state;
-    // println!("Step 1: Converted transition {} to self-loop", transition_idx);
-    
-    // Step 2: Collect all outgoing transitions from blue_state
-    let mut blue_outgoing = Vec::new();
-    for i in 0..self.sources.len() {
-        if self.sources[i] == blue_state {
-            blue_outgoing.push((self.activities[i], self.targets[i], self.transition_frequencies[i]));
-        }
-    }
-    
-    // println!("Blue state {} outgoing transitions: {:?}", blue_state, blue_outgoing);
-    
-    // Step 3: Remove all transitions from blue_state first
-    self.remove_transitions_from_state(blue_state);
-    
-    // Step 4: Process each collected outgoing transition
-    for (blue_activity, blue_target, blue_frequency) in blue_outgoing {
-        // println!("Processing blue transition: {}->{}({:?}, freq={})", blue_state, blue_target, blue_activity, blue_frequency);
+
+    if out_going_count > 1 {
+
+        // println!(" able to merge from red state {} to blue state {}, red states: {:?}, blue states: {:?}", red_state, blue_state, red_states, blue_states);
+
+        let transition_idx = red_to_blue_transition
+            .ok_or_else(|| anyhow!("No transition found from red state {} to blue state {}", red_state, blue_state))?;
         
-        // Check if red_state already has an outgoing transition with the same activity
-        let mut red_existing = None;
-        for j in 0..self.sources.len() {
-            if self.sources[j] == red_state && self.activities[j] == blue_activity {
-                red_existing = Some(j);
-                break;
+        // Step 1: Convert red->blue transition to self-loop on red
+        self.targets[transition_idx] = red_state;
+        // println!("Step 1: Converted transition {} to self-loop", transition_idx);
+        
+        // Step 2: Collect all outgoing transitions from blue_state
+        let mut blue_outgoing = Vec::new();
+        for i in 0..self.sources.len() {
+            if self.sources[i] == blue_state {
+                blue_outgoing.push((self.activities[i], self.targets[i], self.transition_frequencies[i]));
             }
         }
         
-        if let Some(red_idx) = red_existing {
-            let red_target = self.targets[red_idx];
-            // println!("Found conflicting transition: red {}->{}({:?}) vs blue {}->{}({:?})", 
-            //         red_state, red_target, blue_activity, blue_state, blue_target, blue_activity);
+        // println!("Blue state {} outgoing transitions: {:?}", blue_state, blue_outgoing);
+        
+        // Step 3: Remove all transitions from blue_state first
+        self.remove_transitions_from_state(blue_state);
+        
+        // Step 4: Process each collected outgoing transition
+        for (blue_activity, blue_target, blue_frequency) in blue_outgoing {
+            // println!("Processing blue transition: {}->{}({:?}, freq={})", blue_state, blue_target, blue_activity, blue_frequency);
             
-            // Combine frequencies
-            self.transition_frequencies[red_idx] += blue_frequency;
-            
-            // If targets are different, merge them
-            if blue_target != red_target {
-                // println!("Merging target states {} and {}", blue_target, red_target);
-                self.merge_states(blue_target, red_target, red_states, blue_states)?;
+            // Check if red_state already has an outgoing transition with the same activity
+            let mut red_existing = None;
+            for j in 0..self.sources.len() {
+                if self.sources[j] == red_state && self.activities[j] == blue_activity {
+                    red_existing = Some(j);
+                    break;
+                }
             }
-        } else {
-            // No conflict, add new transition from red to blue_target
-            // println!("Adding new transition {}->{}({:?}) with freq {}", 
-            //         red_state, blue_target, blue_activity, blue_frequency);
             
-            // Find the correct position to insert (maintain sorted order if needed)
-            let insert_pos = self.sources.len(); // For now, just append
-            
-            self.sources.insert(insert_pos, red_state);
-            self.targets.insert(insert_pos, blue_target);
-            self.activities.insert(insert_pos, blue_activity);
-            self.transition_frequencies.insert(insert_pos, blue_frequency);
+            if let Some(red_idx) = red_existing {
+                let red_target = self.targets[red_idx];
+                // println!("Found conflicting transition: red {}->{}({:?}) vs blue {}->{}({:?})", 
+                //         red_state, red_target, blue_activity, blue_state, blue_target, blue_activity);
+                
+                // Combine frequencies
+                self.transition_frequencies[red_idx] += blue_frequency;
+                
+                // If targets are different, merge them
+                if blue_target != red_target {
+                    // println!("Merging target states {} and {}", blue_target, red_target);
+                    self.merge_states(blue_target, red_target, red_states, blue_states)?;
+                }
+            } else {
+                // No conflict, add new transition from red to blue_target
+                // println!("Adding new transition {}->{}({:?}) with freq {}", 
+                //         red_state, blue_target, blue_activity, blue_frequency);
+                
+                // Find the correct position to insert (maintain sorted order if needed)
+                let insert_pos = self.sources.len(); // For now, just append
+                
+                self.sources.insert(insert_pos, red_state);
+                self.targets.insert(insert_pos, blue_target);
+                self.activities.insert(insert_pos, blue_activity);
+                self.transition_frequencies.insert(insert_pos, blue_frequency);
+            }
         }
+        
+        // Step 5: Transfer terminating frequency
+        self.state_terminating_frequencies[red_state] += self.state_terminating_frequencies[blue_state];
+        self.state_terminating_frequencies[blue_state] = 0;
+        
+        // Step 6: Update state sets
+        blue_states.remove(&blue_state);
+        
+        // println!("After merge - sources: {:?}", self.sources);
+        // println!("After merge - targets: {:?}", self.targets);
     }
-    
-    // Step 5: Transfer terminating frequency
-    self.state_terminating_frequencies[red_state] += self.state_terminating_frequencies[blue_state];
-    self.state_terminating_frequencies[blue_state] = 0;
-    
-    // Step 6: Update state sets
-    blue_states.remove(&blue_state);
-    
-    // println!("After merge - sources: {:?}", self.sources);
-    // println!("After merge - targets: {:?}", self.targets);
-    
+   
     Ok(())
 }
 
@@ -558,6 +566,33 @@ fn merge_states(
         
         Ok(())
     }
+
+   /// Filters the system using multiple threshold percentages and returns multiple filtered systems
+    /// Each system in the result corresponds to the filtering threshold at the same index
+    pub fn filter_by_multiple_percentages(&self, filter_percentages: &[f64]) -> Result<Vec<StochasticTransitionSystem>> {
+        if filter_percentages.is_empty() {
+            return Ok(vec![]);
+        }
+
+        // Validate all percentages
+        for &percentage in filter_percentages {
+            if percentage <= 0.0 || percentage >= 100.0 {
+                return Err(anyhow!("All filter percentages must be between 0 and 100, found: {}", percentage));
+            }
+        }
+
+        let mut results = Vec::with_capacity(filter_percentages.len());
+
+        // Create a filtered system for each threshold
+        for &percentage in filter_percentages {
+            let mut cloned_system = self.clone();
+            cloned_system.filter_by_percentage(percentage)?;
+            results.push(cloned_system);
+        }
+
+        Ok(results)
+    }
+
     
     /// Calculates the depth (shortest distance from initial state) for each state
     fn calculate_state_depths(&self) -> HashMap<usize, usize> {
@@ -855,7 +890,7 @@ fn merge_states(
         // }
         
         // Step 4: Merge states within each partition block
-        let merged_count = self.merge_partition_blocks(partition)?;
+        self.merge_partition_blocks(partition)?;
         
         // println!("Hopcroft minimization completed. Merged {} states", merged_count);
         Ok(original_state_count - (self.max_state + 1))
@@ -887,9 +922,9 @@ fn merge_states(
         let partition: Vec<HashSet<usize>> = signature_to_states.values().cloned().collect();
         
         // println!("Initial partition based on state signatures:");
-        for (i, block) in partition.iter().enumerate() {
+        for (_, block) in partition.iter().enumerate() {
             if let Some(&representative) = block.iter().next() {
-                let signature = self.compute_state_signature(representative);
+                self.compute_state_signature(representative);
                 // println!("  Block {} (signature='{}'): {:?}", i, signature, block);
             }
         }
@@ -1051,7 +1086,7 @@ fn merge_states(
     fn merge_partition_blocks(&mut self, partition: Vec<HashSet<usize>>) -> Result<usize> {
         let mut total_merged = 0;
         
-        for (block_id, block) in partition.into_iter().enumerate() {
+        for (_, block) in partition.into_iter().enumerate() {
             if block.len() <= 1 {
                 continue;
             }
