@@ -1,7 +1,7 @@
 use anyhow::{Context, anyhow};
 use clap::{Arg, ArgAction, value_parser};
-use ebi_objects::{EbiObject, EbiObjectType, HasActivityKey};
-
+use ebi_objects::HasActivityKey;
+use ebi_arithmetic::{Fraction, Zero,fraction::{fraction_enum::FractionEnum}};
 use crate::{
     ebi_framework::{
         ebi_command::EbiCommand,
@@ -10,11 +10,13 @@ use crate::{
         ebi_trait::EbiTrait,
     },
     ebi_traits::{
+        ebi_trait_finite_stochastic_language::EbiTraitFiniteStochasticLanguage,
         ebi_trait_stochastic_semantics::EbiTraitStochasticSemantics,
     },
     math::constant_fraction::ConstFraction,
     techniques::predict_trace::PredictTrace,
 };
+
 
 pub const EBI_PREDICTION: EbiCommand = EbiCommand::Group {
     name_short: "pred",
@@ -22,12 +24,13 @@ pub const EBI_PREDICTION: EbiCommand = EbiCommand::Group {
     explanation_short: "Predict the next sequence of events in a running trace.",
     explanation_long: None,
     children: &[
-        &EBI_PREDICTION_NEXT,
+        &EBI_PREDICTION_TRACE_NEXT,
+        &EBI_PREDICTION_LOG_NEXT,
         // &EBI_PREDICTION_SUFFIX,
     ],
 };
 
-pub const EBI_PREDICTION_NEXT: EbiCommand = EbiCommand::Command {
+pub const EBI_PREDICTION_TRACE_NEXT: EbiCommand = EbiCommand::Command {
     name_short: "pretra",
     name_long: Some("predict-trace"),
     library_name: "ebi_commands::ebi_command_prediction::EBI_PREDICT_TRACE",
@@ -72,16 +75,52 @@ pub const EBI_PREDICTION_NEXT: EbiCommand = EbiCommand::Command {
 
             log::trace!("predict the trace {:?} given the model", trace);
 
-            let result = semantics
+            let num = semantics
                 .predict_trace(&trace)
                 .with_context(|| format!("cannot explain the trace {:?}", trace))?;
-            return Ok(EbiOutput::Object(EbiObject::LanguageOfAlignments(result)));
+            Ok(EbiOutput::Fraction(FractionEnum::from((num, trace.len()))))
         } else {
-            return Err(anyhow!("no trace given"));
+            Err(anyhow!("no trace given"))
         }
     },
-    output_type: &EbiOutputType::ObjectType(EbiObjectType::LanguageOfAlignments),
+    output_type: &EbiOutputType::Fraction,
 };
+
+pub const EBI_PREDICTION_LOG_NEXT: EbiCommand = EbiCommand::Command {
+    name_short: "prelog",
+    name_long: Some("predict-log"),
+    library_name: "ebi_commands::ebi_command_prediction::EBI_PREDICT_LOG",
+    explanation_short: "Compute the most likely next activity of a log given the stochastic model.",
+    explanation_long: None,
+    latex_link: None,
+    cli_command: None,
+    exact_arithmetic: false,
+    input_types: &[
+        &[&EbiInputType::Trait(EbiTrait::FiniteStochasticLanguage)],
+        &[&EbiInputType::Trait(EbiTrait::StochasticSemantics)],
+    ],
+    input_names: &["FILE_1", "FILE_2"],
+    input_helps: &[
+        "The model.",
+        "The event log",
+    ],
+    execute: |mut inputs, _| {
+        let log = inputs
+        .remove(0)
+        .to_type::<dyn EbiTraitFiniteStochasticLanguage>()?;
+
+        let semantics = inputs.remove(0).to_type::<EbiTraitStochasticSemantics>()?;
+
+        let _ = semantics
+            .predict_log(log)
+            .context("cannot make prediction for the log")?;
+        Ok(EbiOutput::Fraction(Fraction::zero()))
+    },
+    output_type: &EbiOutputType::Fraction,
+};
+
+
+
 
 
 
