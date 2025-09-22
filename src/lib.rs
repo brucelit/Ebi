@@ -21,6 +21,7 @@ pub mod ebi_commands {
     pub mod ebi_command_discover_non_stochastic;
     pub mod ebi_command_info;
     pub mod ebi_command_itself;
+    pub mod ebi_command_prediction;
     pub mod ebi_command_probability;
     pub mod ebi_command_sample;
     pub mod ebi_command_test;
@@ -135,6 +136,7 @@ pub mod techniques {
     pub mod align;
     pub mod alignment_stochastic_miner;
     pub mod association;
+    pub mod astar_for_prediction;
     pub mod completeness;
     pub mod deterministic_semantics_for_stochastic_semantics;
 
@@ -163,6 +165,7 @@ pub mod techniques {
     pub mod escaping_edges_precision;
     pub mod executions;
     pub mod explain_trace;
+    pub mod predict_trace;
     pub mod fitness;
     pub mod flower_miner;
     pub mod hellinger_stochastic_conformance;

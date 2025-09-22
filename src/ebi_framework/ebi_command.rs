@@ -21,7 +21,7 @@ use crate::{
         ebi_command_conformance, ebi_command_conformance_non_stochastic, ebi_command_convert,
         ebi_command_discover, ebi_command_discover_non_stochastic, ebi_command_info,
         ebi_command_itself, ebi_command_probability, ebi_command_sample, ebi_command_test,
-        ebi_command_validate, ebi_command_visualise,
+        ebi_command_validate, ebi_command_visualise, ebi_command_prediction
     },
     ebi_framework::ebi_output,
 };
@@ -53,6 +53,7 @@ pub const EBI_COMMANDS: EbiCommand = EbiCommand::Group {
         &ebi_command_test::EBI_TEST,
         &ebi_command_validate::EBI_VALIDATE,
         &ebi_command_visualise::EBI_VISUALISE,
+        &ebi_command_prediction::EBI_PREDICTION,
     ],
 };
 
