@@ -7,14 +7,14 @@ use crate::{
 };
 use anyhow::{Result, anyhow};
 use ebi_arithmetic::{MaybeExact, Zero};
-use ebi_objects::{Activity, ebi_objects::labelled_petri_net::TransitionIndex, ebi_objects::language_of_alignments::Move};
+use ebi_objects::{Activity, ebi_objects::labelled_petri_net::TransitionIndex, ebi_objects::language_of_alignments::Move, ActivityKeyTranslator};
 use std::ops::{Add, AddAssign};
 use std::{
     fmt::{Debug, Display},
     hash::Hash,
 };
 
-const ALPHA: f64 = 1.0;
+const ALPHA: f64 = 0.1;
 
 #[derive(Clone, Debug)]
 pub struct StochasticWeightedCost {
@@ -228,7 +228,7 @@ impl<State: Displayable> dyn StochasticSemantics<StoSemState = State, SemState =
                     Some((path, _cost)) => {
                         let predicted_next_activity =  get_next_activity(self, &prefix, path);
                         if predicted_next_activity.is_none() && next_activity.is_none() {
-                            println!("Correctly predicted next activity to be None after prefix {:?}", prefix);
+                            println!("Correctly predicted the end of prefix {:?}", prefix);
                             correct_predictions += 1;
                             continue;
                         }
@@ -369,14 +369,24 @@ impl<State: Displayable> dyn StochasticSemantics<StoSemState = State, SemState =
         event_log: Box<dyn EbiTraitFiniteStochasticLanguage>,
     ) -> Result<u32> {
         let mut accuracy = 0.0;
+
+        let mut activity_key1 = self.activity_key().clone();
+        let translator =
+            ActivityKeyTranslator::new(&event_log.activity_key(), &mut activity_key1);
+
+
         for (trace, probability) in event_log.iter_trace_probability() {
+            let trace2 = &translator.translate_trace(trace);
+
             // get the prefix and the next activity
             let mut prefix_collection = Vec::new();
-            for i in 1..= trace.len() {
-                prefix_collection.push((trace[..i].to_vec(), trace.get(i)));
+            for i in 1..= trace2.len() {
+                prefix_collection.push((trace2[..i].to_vec(), trace2.get(i)));
                 }
             let mut correct_predictions: i128 = 0;
-                
+            
+            println!("\nfor trace {:?}", trace.clone());
+
             // iterate the prefix of the trace and align it
             for (prefix, next_activity) in prefix_collection {
                 // get the start state
@@ -473,13 +483,11 @@ impl<State: Displayable> dyn StochasticSemantics<StoSemState = State, SemState =
                         Some((path, _cost)) => {
                             let predicted_next_activity =  get_next_activity(self, &prefix, path);
                             if predicted_next_activity.is_none() && next_activity.is_none() {
-                                println!("Correctly predicted next activity to be None after prefix {:?}", prefix);
+                                println!("Correctly predicted the end of prefix {:?}", prefix);
                                 correct_predictions += 1;
-                                continue;
                             }
                             else if predicted_next_activity.is_none() && !next_activity.is_none() {
                                 println!("Incorrectly predicted next activity to be None after prefix {:?}", prefix);
-                                continue;
                             }
                             else if !predicted_next_activity.is_none() && next_activity.is_none() {
                                 println!("Incorrectly predicted next activity after prefix {:?}, actual next activity is None", prefix);
@@ -497,6 +505,9 @@ impl<State: Displayable> dyn StochasticSemantics<StoSemState = State, SemState =
                     }
                 } 
             }
+            println!("probability of this trace: {}", probability);
+            println!("trace: {:?}", trace2);
+            println!("correct predictions for this trace: {} / {}", correct_predictions, trace.len());
             accuracy += correct_predictions as f64 / trace.len() as f64 * probability.clone().approx().unwrap() as f64;
         }
         println!("accuracy for prediction: {}", accuracy);
